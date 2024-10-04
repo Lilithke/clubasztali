@@ -20,8 +20,9 @@ namespace Bookclub_desktop
             {
                 ReadAllMembers();
                 Console.WriteLine("Kitiltott tagok száma: {0}",BannedSum());
+                //Console.WriteLine("{0} a tagok között 18 évnél fiatalabb személy.", Youngerthan18() ? "Van" : "Nincs");
                 Console.WriteLine("{0} a tagok között 18 évnél fiatalabb személy.", DateDifferenc());
-                Console.WriteLine("A legidősebb clubtag:{0}");
+                // Console.WriteLine("A legidősebb clubtag:{0}",OldestMember());
                 Console.ReadKey();
             }
             catch (MySqlException ex)
@@ -32,6 +33,11 @@ namespace Bookclub_desktop
             }
             
         }
+
+        /*private static object OldestMember()
+        {
+            
+        }*/
 
         public static DateTime oneGoodResult()
         {
@@ -70,7 +76,7 @@ namespace Bookclub_desktop
         private static bool Youngerthan18()
         {
             int index = 0;
-            while (index < members.Count && (members[index].Birth_date) < oneGoodResult())
+            while (index < members.Count && (members[index].Birth_date) > oneGoodResult())
             {
                 index++;
             }
