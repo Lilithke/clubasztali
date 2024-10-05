@@ -42,7 +42,7 @@ namespace Bookclub_desktop
             
         }
 
-        private static void Banned(string BannedName)
+        private static void Banned(string BannedName) // NEM MÜKÖDIK
         {
             int index = 0;
             while (index<members.Count && members[index].Name != BannedName)
