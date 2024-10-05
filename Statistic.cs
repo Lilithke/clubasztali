@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,14 @@ namespace Bookclub_desktop
                 Console.WriteLine("Kitiltott tagok száma: {0}",BannedSum());
                 //Console.WriteLine("{0} a tagok között 18 évnél fiatalabb személy.", Youngerthan18() ? "Van" : "Nincs");
                 Console.WriteLine("{0} a tagok között 18 évnél fiatalabb személy.", DateDifferenc());
-                Console.WriteLine("A legidősebb clubtag:{0}",OldestMember());
+                // Console.WriteLine("A legidősebb klubtag:{0}", OldestMember()); NEM TUDOM
+                /* Console.WriteLine("Tagok száma:" +
+                     "\r\n\tNő:{0}" +
+                     "\r\n\tFérfi:{1}" +
+                     "\r\n\tIsmeretlen:{2}",SumMemvers());NEM TUDOM */
+                Console.WriteLine("Adjon meg egy nevet: ");
+                string BannedName = Console.ReadLine();
+                Banned(BannedName);
                 Console.ReadKey();
             }
             catch (MySqlException ex)
@@ -34,10 +42,42 @@ namespace Bookclub_desktop
             
         }
 
-        private static object OldestMember()
+        private static void Banned(string BannedName)
         {
-            
+            int index = 0;
+            while (index<members.Count && members[index].Name != BannedName)
+            {
+                index++;
+            }
+            if (members[index].Name == BannedName && members[index].Banned != true)
+            {
+                Console.WriteLine("A megadott személy nincs kitiltva");
+            }
+            else
+            {
+                Console.WriteLine("Nincs ilyen tagja a klubnak");
+            }
         }
+
+        /* private static object SumMemvers()
+         {
+             //
+         }*/
+
+        /*private static object OldestMember()
+        {
+            Member older = members[0];
+            for (int i = 1; i < members.Count; i++)
+            {
+                if (members[i].Birth_date > older)
+                {
+                    older = members[i];
+                }
+            }
+            return older;
+
+            
+        }*/
 
         public static DateTime oneGoodResult()
         {
